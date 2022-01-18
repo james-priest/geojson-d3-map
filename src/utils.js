@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import * as L from 'leaflet'
 
-export const buildD3Svg = (countries, width, height) => {
+export const buildD3Svg = (regions, width, height) => {
   const svg = d3
     // .select("body")
     .select('#chart')
@@ -16,18 +16,18 @@ export const buildD3Svg = (countries, width, height) => {
       [0, 0],
       [width, height],
     ],
-    countries
+    regions
   )
   console.log('projection', projection([-76.958104, 38.854865]))
 
   const path = d3.geoPath().projection(projection)
 
-  console.log('geojson', countries)
+  console.log('geojson', regions)
 
   svg
     .selectAll('path')
     .append('path')
-    .data(countries.features)
+    .data(regions.features)
     .enter()
     .append('path')
     .attr('d', path)
@@ -110,7 +110,7 @@ const getTableStats = (layer) => {
   return result1
 }
 
-export const buildLeafletMap = (countries, width, height) => {
+export const buildLeafletMap = (regions, width, height) => {
   const mapContainer = document.getElementById('map')
   mapContainer.style.width = width
   mapContainer.style.height = height
@@ -119,43 +119,57 @@ export const buildLeafletMap = (countries, width, height) => {
   const map = L.map(mapContainer).setView([38.9065, -77.012], 12)
 
   //  visual map
-  const stadiaAlidadeSmooth = L.tileLayer(
-    'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+
+  const mapLayer = L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
-      maxZoom: 20,
+      maxZoom: 15,
       attribution:
-        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }
   ).addTo(map)
-  console.log('Stadia_AlidadeSmooth', stadiaAlidadeSmooth)
+  // const mapProvider = L.tileLayer(
+  //   'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+  //   {
+  //     maxZoom: 20,
+  //     attribution:
+  //       '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+  //   }
+  // ).addTo(map)
+
+  console.log('mapLayer', mapLayer)
 
   // const fillColor = '#432'
-  const fillColor = '#666'
+  const fillColor = '#333'
   const hoverFill = '#f00'
-  const outline = '#eee'
-  const outlineHover = '#eee'
+  const outline = '#fff'
+  const outlineHover = '#fff'
 
   // L.svg({ clickable: true }).addTo(map) // we have to make the svg layer clickable
 
   // initialize svg to add to map
-  const WashingtonDCLayer = L.geoJSON(countries, {
-    weight: 1,
+  const WashingtonDCLayer = L.geoJSON(regions, {
+    weight: 2,
     color: outline,
     // color: '#F00',
     fillColor,
   })
     .bindTooltip((layer) => getTableStats(layer))
     .on('mouseover', (e) => {
-      console.log('leaflet e', e)
+      // console.log('leaflet e', e)
       e.propagatedFrom.setStyle({ color: outlineHover, fillColor: hoverFill })
     })
     .on('mouseout', (e) => {
-      console.log('leaflet e', e)
+      // console.log('leaflet e', e)
       e.propagatedFrom.setStyle({ color: outline, fillColor })
     })
     .addTo(map)
 
   // fit bounds of polygon and get map view to fit (thank God for this method!)
   map.fitBounds(WashingtonDCLayer.getBounds())
-  console.log('countries.getBounds()', WashingtonDCLayer.getBounds())
+  console.log('regions.getBounds()', WashingtonDCLayer.getBounds())
+  return {
+    map,
+    mapLayer,
+  }
 }
