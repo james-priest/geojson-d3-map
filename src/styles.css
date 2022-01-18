@@ -78,10 +78,9 @@ body {
   padding-right: 14px;
 }
 
-
-.tooltip-body table td.border-bottom,
-.tooltip-body table th.border-bottom {
-  border-bottom: 1px solid #ccc;
+.tooltip-body table tr:nth-last-of-type(2) td,
+.tooltip-body table tr:nth-last-of-type(2) th {
+  border-bottom: 1px solid #aaa;
 }
 
 #legend {
@@ -94,9 +93,19 @@ body {
   height: 200px;
   z-index: 1000;
   background-color: #eee;
-  padding: 16px;
+  padding: 4px 16px;
 }
 
 #legend h4 {
-  margin: 0 0 10px;
+  margin: 12px 0 0px;
+}
+
+.map-radio,
+.map-check {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hide {
+  display: none;
 }

@@ -42,7 +42,16 @@ export const buildD3Svg = (regions, width, height) => {
 }
 
 const getTableStats = (layer) => {
-  const result1 = `
+  const check = [
+    document.getElementById('check1'),
+    document.getElementById('check2'),
+    document.getElementById('check3'),
+    document.getElementById('check4'),
+    document.getElementById('check5'),
+  ]
+  const count = [0, 0, 0, 0, 0]
+
+  let result1 = `
     <div class="tooltip-body">
     <h3>${layer.feature.properties.label_name}</h3>
     <p>Impaired car crashes by year</p>
@@ -51,62 +60,57 @@ const getTableStats = (layer) => {
         <th>YEAR</th>
         <th>COUNT</th>
       </thead>
-      <tbody>
+      <tbody>`
+  if (check[0].checked) {
+    count[0] = layer.feature.properties['2010'] || 0
+    result1 += `
         <tr>
           <th>2010</th>
-          <td>${layer.feature.properties['2010'] || 0}</td>
-        </tr>
+          <td>${count[0]}</td>
+        </tr>`
+  }
+  if (check[1].checked) {
+    count[1] = layer.feature.properties['2011'] || 0
+    result1 += `
         <tr>
           <th>2011</th>
-          <td>${layer.feature.properties['2011'] || 0}</td>
-        </tr>
+          <td>${count[1]}</td>
+        </tr>`
+  }
+  if (check[2].checked) {
+    count[2] = layer.feature.properties['2012'] || 0
+    result1 += `
         <tr>
           <th>2012</th>
-          <td>${layer.feature.properties['2012'] || 0}</td>
-        </tr>
+          <td>${count[2]}</td>
+        </tr>`
+  }
+  if (check[3].checked) {
+    count[3] = layer.feature.properties['2013'] || 0
+    result1 += `
         <tr>
           <th>2013</th>
-          <td>${layer.feature.properties['2013'] || 0}</td>
-        </tr>
-        <tr class="border-bottom">
-          <th class="border-bottom">2014</th>
-          <td class="border-bottom">${
-            layer.feature.properties['2014'] || 0
-          }</td>
-        </tr>
+          <td>${count[3]}</td>
+        </tr>`
+  }
+  if (check[4].checked) {
+    count[4] = layer.feature.properties['2014'] || 0
+    result1 += `
+        <tr>
+          <th>2014</th>
+          <td>${count[4]}</td>
+        </tr>`
+  }
+  result1 += `
         <tr>
           <th>TOTAL</th>
-          <td>${layer.feature.properties.total || 0}</td>
+          <td>${d3.sum(count) || 0}</td>
         </tr>
       </tbody>
     </table>
     </div>
     `
-  // const result2 = `
-  //   <h3>${layer.feature.properties.label_name}</h3>
-  //   <p>Number of impaired car crashed by year</p>
-  //   <table class="tooltip-table">
-  //     <thead>
-  //         <th>2010</th>
-  //         <th>2011</th>
-  //         <th>2012</th>
-  //         <th>2013</th>
-  //         <th>2014</th>
-  //         <th>total</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       <tr>
-  //         <td>${layer.feature.properties['2010'] || 0}</td>
-  //         <td>${layer.feature.properties['2011'] || 0}</td>
-  //         <td>${layer.feature.properties['2012'] || 0}</td>
-  //         <td>${layer.feature.properties['2013'] || 0}</td>
-  //         <td>${layer.feature.properties['2014'] || 0}</td>
-  //         <td>${layer.feature.properties.total || 0}</td>
-  //       </tr>
-  //     </tbody>
-  //   </table>
-  //   `
+
   return result1
 }
 
@@ -128,14 +132,6 @@ export const buildLeafletMap = (regions, width, height) => {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }
   ).addTo(map)
-  // const mapProvider = L.tileLayer(
-  //   'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-  //   {
-  //     maxZoom: 20,
-  //     attribution:
-  //       '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-  //   }
-  // ).addTo(map)
 
   console.log('mapLayer', mapLayer)
 
@@ -154,7 +150,10 @@ export const buildLeafletMap = (regions, width, height) => {
     // color: '#F00',
     fillColor,
   })
-    .bindTooltip((layer) => getTableStats(layer))
+    .bindTooltip((layer) => {
+      // layer.
+      return getTableStats(layer)
+    })
     .on('mouseover', (e) => {
       // console.log('leaflet e', e)
       e.propagatedFrom.setStyle({ color: outlineHover, fillColor: hoverFill })
