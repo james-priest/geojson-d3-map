@@ -123,13 +123,12 @@ export const buildLeafletMap = (regions, width, height) => {
   const map = L.map(mapContainer).setView([38.9065, -77.012], 12)
 
   //  visual map
-
   const mapLayer = L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
     {
       maxZoom: 15,
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     }
   ).addTo(map)
 
@@ -195,22 +194,25 @@ export const addLegendEventListeners = (map, mapLayer) => {
         case 1:
           map.removeLayer(tempMapLayer)
           tempMapLayer = L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
             {
               maxZoom: 15,
               attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
             }
           ).addTo(map)
           break
         case 2:
           map.removeLayer(tempMapLayer)
           tempMapLayer = L.tileLayer(
-            'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+            'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}',
             {
-              maxZoom: 15,
               attribution:
-                '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+                'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              subdomains: 'abcd',
+              minZoom: 0,
+              maxZoom: 18,
+              ext: 'png',
             }
           ).addTo(map)
           break
@@ -228,24 +230,21 @@ export const addLegendEventListeners = (map, mapLayer) => {
         case 4:
           map.removeLayer(tempMapLayer)
           tempMapLayer = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             {
+              maxZoom: 15,
               attribution:
-                'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }
           ).addTo(map)
           break
         case 5:
           map.removeLayer(tempMapLayer)
           tempMapLayer = L.tileLayer(
-            'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}',
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             {
               attribution:
-                'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              subdomains: 'abcd',
-              minZoom: 0,
-              maxZoom: 18,
-              ext: 'png',
+                'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
             }
           ).addTo(map)
           break
