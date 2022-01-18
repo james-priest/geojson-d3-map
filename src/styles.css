@@ -1,0 +1,83 @@
+body {
+  font-family: sans-serif;
+}
+
+#chart {
+  margin: 10px 0;
+}
+
+#chart path {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 0.5px;
+}
+
+#chart path.active {
+  fill: pink;
+}
+
+#chart circle {
+  fill: #fff;
+  fill-opacity: 0.4;
+  stroke: #111;
+}
+
+#chart circle.active {
+  fill: blue;
+}
+
+/* #map {
+  height: 680px;
+} */
+
+/* tooltip styling */
+.tooltip-body {
+  padding: 6px 10px 0 10px;
+  font-size: 0.875em;
+}
+
+.tooltip-body h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.tooltip-body p {
+  margin-top: 4px;
+}
+
+.tooltip-body table {
+  width: 70px;
+  border-collapse: collapse;
+}
+
+.tooltip-body table thead th:last-of-type,
+.tooltip-body table tbody td:last-of-type {
+  padding-right: 20px;
+}
+
+.tooltip-body thead th {
+  background-color: #eee;
+}
+
+.tooltip-body table td,
+.tooltip-body table th {
+  border-bottom: 1px solid #eee;
+  padding: 4px 10px;
+}
+
+.tooltip-body table tr:last-of-type td,
+.tooltip-body table tr:last-of-type th {
+  border-bottom: inherit;
+}
+
+.tooltip-body td:nth-of-type(1),
+.tooltip-body th {
+  text-align: right;
+  padding-right: 14px;
+}
+
+
+.tooltip-body table td.border-bottom,
+.tooltip-body table th.border-bottom {
+  border-bottom: 1px solid #ccc;
+}
