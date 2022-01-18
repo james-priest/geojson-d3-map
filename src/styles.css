@@ -26,9 +26,9 @@ body {
   fill: blue;
 }
 
-/* #map {
+#map {
   height: 680px;
-} */
+}
 
 /* tooltip styling */
 .tooltip-body {
