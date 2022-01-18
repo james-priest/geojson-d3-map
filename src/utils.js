@@ -143,7 +143,7 @@ export const buildLeafletMap = (regions, width, height) => {
   // L.svg({ clickable: true }).addTo(map) // we have to make the svg layer clickable
 
   // initialize svg to add to map
-  const WashingtonDCLayer = L.geoJSON(regions, {
+  const washingtonDCLayer = L.geoJSON(regions, {
     weight: 2,
     color: outline,
     // color: '#F00',
@@ -175,8 +175,8 @@ export const buildLeafletMap = (regions, width, height) => {
     .addTo(map)
 
   // fit bounds of polygon and get map view to fit (thank God for this method!)
-  map.fitBounds(WashingtonDCLayer.getBounds(), { paddingTopLeft: [400, 0] })
-  console.log('regions.getBounds()', WashingtonDCLayer.getBounds())
+  map.fitBounds(washingtonDCLayer.getBounds(), { paddingTopLeft: [400, 0] })
+  console.log('regions.getBounds()', washingtonDCLayer.getBounds())
   return {
     map,
     mapLayer,

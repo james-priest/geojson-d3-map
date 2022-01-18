@@ -124,3 +124,14 @@ body {
 .hide {
   display: none;
 }
+
+#barchart {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  margin-top: 16px;
+  font-size: 20px;
+  color: #999;
+}
