@@ -149,18 +149,29 @@ export const buildLeafletMap = (regions, width, height) => {
     color: outline,
     // color: '#F00',
     fillColor,
+    fillOpacity: 0.3,
   })
-    .bindTooltip((layer) => {
-      // layer.
-      return getTableStats(layer)
-    })
+    .bindTooltip(
+      (layer) => {
+        // layer.
+        return getTableStats(layer)
+      },
+      {
+        offset: L.point(50, 0),
+        opacity: 1,
+      }
+    )
     .on('mouseover', (e) => {
       // console.log('leaflet e', e)
-      e.propagatedFrom.setStyle({ color: outlineHover, fillColor: hoverFill })
+      e.propagatedFrom.setStyle({
+        color: outlineHover,
+        fillColor: hoverFill,
+        fillOpacity: 0.5,
+      })
     })
     .on('mouseout', (e) => {
       // console.log('leaflet e', e)
-      e.propagatedFrom.setStyle({ color: outline, fillColor })
+      e.propagatedFrom.setStyle({ color: outline, fillColor, fillOpacity: 0.3 })
     })
     .addTo(map)
 
