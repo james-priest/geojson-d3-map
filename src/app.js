@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
-import * as L from 'leaflet'
+// import * as L from 'leaflet'
 
-import { buildD3Svg, buildLeafletMap } from './utils'
+import { buildD3Svg, buildLeafletMap, addLegendEventListeners } from './utils'
 import './styles.css'
 
 document.getElementById('app').innerHTML = `
@@ -21,101 +21,18 @@ d3.json(url, (error, regions) => {
   if (error) console.log(error)
 
   // *****************************
-  // MAP #1
+  // MAP #1 - D3, GeoJSON
   // *****************************
   buildD3Svg(regions, width, height)
 
   // *****************************
-  // MAP #2
+  // MAP #2 - Leaflet, D3, GeoJSON
   // *****************************
   // buildLeafletMap(regions)
   const { map, mapLayer } = buildLeafletMap(regions)
-  let tempMapLayer = mapLayer
 
+  // *****************************
   // add EventListeners
-  const radioHTMLCol = document.getElementsByName('mapType')
-  const radioArr = [...radioHTMLCol]
-  radioArr.forEach((item) => {
-    item.addEventListener('change', (e) => {
-      switch (parseInt(+e.target.value, 10)) {
-        case 1:
-          map.removeLayer(tempMapLayer)
-          tempMapLayer = L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            {
-              maxZoom: 15,
-              attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            }
-          ).addTo(map)
-          break
-        case 2:
-          map.removeLayer(tempMapLayer)
-          tempMapLayer = L.tileLayer(
-            'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-            {
-              maxZoom: 15,
-              attribution:
-                '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-            }
-          ).addTo(map)
-          break
-        case 3:
-          map.removeLayer(tempMapLayer)
-          tempMapLayer = L.tileLayer(
-            'https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png',
-            {
-              maxZoom: 20,
-              attribution:
-                '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-            }
-          ).addTo(map)
-          break
-        case 4:
-          map.removeLayer(tempMapLayer)
-          tempMapLayer = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-            {
-              attribution:
-                'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-            }
-          ).addTo(map)
-          break
-        case 5:
-          map.removeLayer(tempMapLayer)
-          tempMapLayer = L.tileLayer(
-            'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}',
-            {
-              attribution:
-                'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              subdomains: 'abcd',
-              minZoom: 0,
-              maxZoom: 18,
-              ext: 'png',
-            }
-          ).addTo(map)
-          break
-        default:
-      }
-    })
-  })
-  console.log(`radioHTMLCol`, radioHTMLCol)
-  console.log(`radioArr`, radioArr)
-
-  // const yearCheck1 = document.getElementById('check1')
-  // yearCheck1.addEventListener('change', (e) => {
-  //   // const map = L.tileLayer('map')
-  //   const val = +e.target.value
-  //   console.log(`val`, val)
-
-  //   const trHTMLCol = document.getElementsByClassName('table-year-1')
-  //   const trArr = [...trHTMLCol]
-  //   console.log(`trHTMLCol`, trHTMLCol)
-  //   console.log(`trArr`, trArr)
-  //   // trArr.forEach((tr) => (tr.style.display = 'none'))
-
-  //   document
-  //     .querySelectorAll('.table-year1')
-  //     .forEach((tr) => tr.classList.add('hide'))
-  // })
+  // *****************************
+  addLegendEventListeners(map, mapLayer)
 })
