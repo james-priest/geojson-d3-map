@@ -32,18 +32,7 @@ d3.json(url, (error, regions) => {
   const { map, mapLayer } = buildLeafletMap(regions)
   let tempMapLayer = mapLayer
 
-  // const changeMapBtn = document.getElementById('changeMap')
-  // changeMapBtn.addEventListener('click', (e) => {
-  //   // const map = L.tileLayer('map')
-  //   L.tileLayer(
-  //     'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-  //     {
-  //       maxZoom: 15,
-  //       attribution:
-  //         '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-  //     }
-  //   ).addTo(map)
-  // })
+  // add EventListeners
   const radioHTMLCol = document.getElementsByName('mapType')
   const radioArr = [...radioHTMLCol]
   radioArr.forEach((item) => {
@@ -110,7 +99,23 @@ d3.json(url, (error, regions) => {
       }
     })
   })
-
   console.log(`radioHTMLCol`, radioHTMLCol)
   console.log(`radioArr`, radioArr)
+
+  // const yearCheck1 = document.getElementById('check1')
+  // yearCheck1.addEventListener('change', (e) => {
+  //   // const map = L.tileLayer('map')
+  //   const val = +e.target.value
+  //   console.log(`val`, val)
+
+  //   const trHTMLCol = document.getElementsByClassName('table-year-1')
+  //   const trArr = [...trHTMLCol]
+  //   console.log(`trHTMLCol`, trHTMLCol)
+  //   console.log(`trArr`, trArr)
+  //   // trArr.forEach((tr) => (tr.style.display = 'none'))
+
+  //   document
+  //     .querySelectorAll('.table-year1')
+  //     .forEach((tr) => tr.classList.add('hide'))
+  // })
 })
