@@ -4,7 +4,11 @@
 
 # GeoJSON D3 Map
 
-This was a technical evaluation given as a take-home coding assignment. The instructions were as follows:
+This was a technical evaluation given as a take-home coding assignment. 
+
+![screenshot](src/assets/screenshot4.jpg)
+
+The instructions were as follows:
 
 *Attached is a geojson file. You may reformat/adjust this file as you see fit for the purposes of this project. This file represents impaired car crashes by neighborhood in the Washington, D.C. area over a five year period (2010-2014). Please use the data in this file to create a single page, coherent representation of the data that users can use to understand various angles/depth of the information provided.*
 
@@ -165,3 +169,13 @@ Some additional issues to pay attention to are
 ### Time spent
 
 I spent the weekend getting up to speed on all the libraries, standards, and concepts. I then spent the following two days building the solution.
+
+## Screenshots
+
+![screenshot](src/assets/screenshot1.jpg)
+
+![screenshot](src/assets/screenshot3.jpg)
+
+![screenshot](src/assets/screenshot2.jpg)
+
+![screenshot](src/assets/screenshot5.jpg)
