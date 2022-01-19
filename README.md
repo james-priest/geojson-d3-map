@@ -88,10 +88,80 @@ Alternatively, a Visual Studio Code extension can be used to run the site from w
 
 ## Development Process
 
-Here are some questions and answers regarding this project.
+Items to answer:
 
-1. short description indicating thought process
-2. what was done and what wasn't done
-3. things to improve if there wer all the time in the world
-4. issues with the implementation
-5. rough estimate of time spent on the project
+1. Provide a short description indicating thought process.
+2. What was done and what wasn't done?
+3. What could be improved if time were not a factor?
+4. What are some potential issues with the implementation?
+5. Provide a rough estimate of time spent on the project.
+
+### Process Description
+
+I had not worked with GeoJSON, D3.js, or Leaflet.js prior to this project.
+
+So, I gave myself the weekend to do the following:
+
+1. Familiarize myself with the GeoJSON specification.
+2. Read D3.js docs and examples
+3. Read Leaflet.js docs and examples
+4. Play with both libraries individually by building small proof-of-concept apps in CodeSandbox and CodePen
+5. Get GeoJSON file to render with D3
+6. Get GeoJSON file to render with Leaflet then combine D3 polygons and hover states.
+
+Once I had enough separate pieces "working", I considered whether to build in React but opted to keep it simple and just use JavaScript, CSS, and DOM...
+
+I did want the benefits of ES6 modules rather than coding directly in a webpage like most examples show so I opted to use Parcel package manager.
+
+Here are the steps I took:
+
+1. Open VS Code and spin up an instance of Parcel (for quick, no-config, JS packaging)
+2. Initialize local git repo for the project
+3. Install ESLint & Prettier
+4. Create/fine-tune package.json and various rc files
+5. Get a GitHub instance going and connect local and remote repos
+
+### Completed Items
+
+Once the dev environment was up and running I built the site in this order:
+
+1. Began with a D3 render of the GeoJSON file - no maps
+2. Rendered that same file with D3 but combined Leaflet for raster mapping (vector would have provided a smoother experience but time was limited)
+3. Added proper scale (zoom) and translate (position) to map layer
+4. Added mouseover/mouseout to D3 neighborhood polygons.
+5. Added tooltip to mouseover/mouseout and accessed layer info including GeoJSON properties (impaired driving stats)
+6. Displayed these properties in table format within tooltip
+7. Created a Legend section
+8. Added ability to select different map types through radio buttons with event handlers for the "change" events
+9. Hard-coded Year Filter section to limit what data is displayed in tooltip.
+10. Added logic to filter out unselected years and aggregate those years that were selected to show an accurate total in the tooltip.
+
+Lastly, I refactored,  and cleaned up both code and UI a bit.
+
+### Additional Items
+
+Some of the things I would have loved to add or include are:
+
+- Mobile-first design approach (in order to target various display viewports for a great User Experience on any device)
+- Responsive design using CSS media queries, and dynamic grow/shrink of map based on viewport and resize events for better Usability
+- Dynamic D3 bar chart that adjusts and animates the yearly stats for each neighborhood as the mouse moves over each region to provide enhanced visualization of data
+- Absolute position tooltip to upper-right corner so the eye doesn't have to chase the popup as the mouse moves over each region. The eye can lock into one are to get the data. Easier on the eyes and better User Experience
+- Add Chloropleth view showing darker colors for high frequency/density areas and lighter colors for less frequency/density areas  
+- Perhaps some additional toggles if this would help convey the information quicker, cleaner, or easier.
+
+### Potential implementation issues
+
+I deployed this using the automatic build system in Netlify that I set up to trigger on merge of PR requests to the main branch of the GitHub repo.
+
+It can also be configured to publish a "hidden" staged copy for review and approval prior to deploying live.
+
+Some additional issues to pay attention to are
+
+1. "Rights of use" for public map solution (many maps require authorization/subscription)
+2. Browser compatibility (mitigated by use of browserlist and PostCSS processing)
+3. Maintainability - if more of these sites are to be built then using React for a quicker and more declarative approach might be good
+4. Use of Typescript for code-time error checking and to prevent many runtime errors might be preferable
+
+### Time spent
+
+I spent the weekend getting up to speed on all the libraries, standards, and concepts. I then spent the following two days building the solution.
