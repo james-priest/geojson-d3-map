@@ -156,8 +156,12 @@ export const buildLeafletMap = (regions, width, height) => {
         return getTableStats(layer)
       },
       {
-        offset: L.point(50, 0),
+        offset: L.point(40, 0),
         opacity: 1,
+        // pane: 'body',
+        // direction: 'top',
+        // permanent: true,
+        // className: 'anchor',
       }
     )
     .on('mouseover', (e) => {

@@ -135,3 +135,11 @@ body {
   font-size: 20px;
   color: #999;
 }
+
+.anchor {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  /* width: 200px; */
+  /* height: 200px; */
+}
